@@ -1,0 +1,37 @@
+<div *ngIf="!loading">
+    <div *ngIf="products.length>0;  else noProducts">
+        <ng-template [ngTemplateOutlet]="productList"></ng-template>
+    </div>
+</div>
+
+<ng-template #productList>
+    <div *ngFor="let product of products">
+        <div class="card mb-3 p-3 rounded" *ngIf="product.isActive">
+            <div class="row">
+                <div class="col-3">
+                    <img src="../../assets/images/{{product.imgUrl}}" alt="" class="img-fluid rounded-start">
+                </div>
+                <div class="col-9">
+                    <div class="card-body">
+                        <h5 class="card-title">{{product.name}}</h5>
+                        <p class="card-text mt-3">{{product.description}}</p>
+                        <a routerLink="/products/{{product.id}}" class="btn btn-primary">Ürün Detay</a>
+                    </div>
+                </div>
+            </div>
+        </div>    
+    </div>
+</ng-template>
+
+<ng-template #noProducts>
+    <div class="alert alert-warning text-center">
+        Ürün Bulunamadı
+    </div>
+</ng-template>
+
+<div class="d-flex justify-content-center" *ngIf="loading">
+    <div class="spinner-border" role="status">
+    </div>
+</div>
+
+

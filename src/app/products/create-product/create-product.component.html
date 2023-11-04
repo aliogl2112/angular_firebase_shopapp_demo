@@ -1,0 +1,41 @@
+<h3>Create Product</h3>
+<form #form="ngForm" (ngSubmit)="saveProduct(form)">
+    <div class="mx-1 alert alert-danger" *ngIf="error.length>=1">
+        {{error}}
+    </div>
+    <div class="mb-3">
+        <label for="name" class="form-label">Name: </label>
+        <input [(ngModel)]="model.name" name="name" #name="ngModel" type="text" id="name" class="form-control" required minlength="5">
+        <div class="text-danger mt-1" *ngIf="name.invalid && name.touched">
+            Ürün ismi en az 5 karakter olmalıdır.
+        </div>
+        <!-- <input #name type="text" id="name" class="form-control"> -->
+    </div>
+    <div class="mb-3">
+        <label for="price" class="form-label">Price: </label>
+        <input [(ngModel)]="model.price" name="price" type="number" id="price" class="form-control" required min="0">
+    </div>
+    <div class="mb-3">
+        <label for="imgUrl" class="form-label">imgUrl: </label>
+        <input [(ngModel)]="model.imgUrl" name="imgUrl" type="text" id="imgUrl" class="form-control" required>
+    </div>
+    <div class="mb-3">
+        <label for="description" class="form-label">Description: </label>
+        <textarea [(ngModel)]="model.description" name="description" class="form-control" id="description" required></textarea>
+    </div>
+    <div class="form-check mb-3">
+        <input [(ngModel)]="model.isActive" name="isActive" class="form-check-input" type="checkbox" id="isActive">
+        <label class="form-check-label" for="isActive">
+            isActive
+        </label>
+    </div>
+    <div class="mb-3">
+        <label class="form-check-label" for="select-category">Select Category</label>
+        <select [(ngModel)]="model.categoryId" name="categoryId" id="select-category" class="form-select" required>
+            <option value="0">Kategori</option>
+            <option *ngFor="let category of categories" value="{{category.id}}">{{category.name}}</option>
+        </select>
+    </div>
+    <button type="submit" class="btn btn-primary">Add Product</button>
+    <!-- <button type="button" class="btn btn-primary" (click)="saveProduct(name,price,imgUrl,description,isActive,select)">Add Product</button> -->
+</form>

@@ -1,0 +1,29 @@
+<h1 class="mb-4">{{isLoginMode?"Giriş Yap":"Kayıt Ol"}}</h1>
+<div class="alert alert-danger" *ngIf="error">{{error}}</div>
+<form #form="ngForm" (ngSubmit)="handleAuth(form)">
+    <div class="mb-3">
+        <label for="email" class="form-label">E-Mail</label>
+        <input class="form-control" type="text" name="email" id="email" ngModel required email minlength="6">
+    </div>
+    <div class="mb-3">
+        <label for="password" class="form-label">Parola <span *ngIf="!isLoginMode">(En az 8 karakter)</span></label>
+        <input type="password" class="form-control" name="password" id="password" ngModel required minlength="8">
+    </div>
+    <div class="mb-3" *ngIf="!isLoginMode">
+        <label for="repassword" class="form-label">Parola Tekrar</label>
+        <input type="password" class="form-control" name="repassword" id="repassword" ngModel required minlength="8">
+    </div>
+
+    <div class="d-grid gap-2">
+        <button [disabled]="!form.valid" type="submit" class="btn btn-primary">
+            {{isLoginMode?"Giriş Yap":"Kayıt Ol"}}
+            <div class="d-flex justify-content-center" *ngIf="loading">
+                <div class="spinner-border" role="status">
+                </div>
+            </div>
+        </button>
+        <button type="button" class="btn btn-outline-primary" (click)="changeMode()">
+            {{isLoginMode?"Henüz hesabım yok.":"Zaten hesabım var."}}
+        </button>
+    </div>
+</form>

@@ -1,0 +1,27 @@
+<div *ngIf="!loading">
+    <div class="card mb-3 p-3 rounded" *ngIf="product;else noProduct">
+        <h4 class="mx-4 card-title">Seçilen Ürün</h4>
+        <div class="row">
+            <div class="col-3">
+                <img src="../../assets/images/{{product.imgUrl}}" alt="" class="img-fluid rounded-start">
+            </div>
+            <div class="col-9">
+                <div class="card-body">
+                    <h5 class="card-title">{{product.name}}</h5>
+                    <p class="card-text mt-3">{{product.description}}</p>
+                </div>
+            </div>
+        </div>
+    </div>  
+</div> 
+
+<ng-template #noProduct>
+    <div class="alert alert-warning text-center">
+        Ürün Bulunamadı
+    </div>
+</ng-template>
+
+<div class="d-flex justify-content-center" *ngIf="loading">
+    <div class="spinner-border" role="status">
+    </div>
+</div>
